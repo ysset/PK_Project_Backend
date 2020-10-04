@@ -24,7 +24,10 @@ app.get("/interesting", async (req, res) => {
 
 app.get("/hotFeed", async (req, res) => {
     let cards = await cardService.getHotFeed()
-    cards.sort((a, b) => new Date(a.date) - new Date(b.date))
+    cards
+        .sort((a, b) => new Date(a.date) - new Date(b.date))
+        .reverse()
+        .slice(0, 12)
     res.send(cards.slice(0, 12))
 })
 

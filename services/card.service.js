@@ -29,7 +29,6 @@ class CardService {
 
     getHotFeed() {
         return Card.find({})
-            .limit(20)
             .catch(err => {
                 throw err
             })
@@ -50,10 +49,10 @@ class CardService {
             let result = await userModel
                 .findById(userId)
                 .populate("usersAuthors")
+            if (result === null) reject("You don't have lovely authors, yet =)")
 
-            if (result.length === 0) {
-                reject('Id not found')
-            }
+            //нечаянно реализовал метод 1:М в коде.
+
             // let yourAuthors = new Promise(async (resolve, reject) => {
             //     result.map(async (object) => {
             //         let findYourAuthors = await userModel.find({_id: [...object.usersAuthors]})
