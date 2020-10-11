@@ -2,6 +2,7 @@ const mongoose = require("mongoose")
 
 const schema = mongoose.Schema({
     cover: String,
+    password: String,
     name: String,
     registrationDate: String,
     usersAuthors: [
@@ -10,7 +11,11 @@ const schema = mongoose.Schema({
             ref: "userModel"
         }
     ],
-    usersCards: Array,
-}, { collection: 'Users' })
+    usersCards: [
+        {
+            type: mongoose.Schema.Types.ObjectID
+        }
+    ],
+}, {collection: 'Users'})
 
 module.exports = mongoose.model("userModel", schema)

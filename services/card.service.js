@@ -1,4 +1,4 @@
-const Card = require("../models/cardModel")
+const cardModel = require("../models/cardModel")
 const authorsCard = require("../models/authorsCardModel")
 const userModel = require("../models/userModel")
 const mongoose = require('mongoose')
@@ -11,7 +11,7 @@ class CardService {
             if (!mongoose.Types.ObjectId.isValid(idToFind)) {
                 return reject('Invalid input')
             }
-            let result = await Card.find({_id: idToFind})
+            let result = await cardModel.find({_id: idToFind})
             if (result.length === 0) {
                 reject('Id not found')
             }
@@ -20,7 +20,7 @@ class CardService {
     }
 
     getInteresting() {
-        return Card
+        return cardModel
             .find({})
             .catch(err => {
                 throw err
@@ -28,7 +28,7 @@ class CardService {
     }
 
     getHotFeed() {
-        return Card.find({})
+        return cardModel.find({})
             .catch(err => {
                 throw err
             })
@@ -63,6 +63,18 @@ class CardService {
             resolve(result.usersAuthors)
         })
     }
+
+    saveCard = async toSave => {
+        await userModel.findOneAndUpdate(
+            { _id: toSave.yourId },
+            { $push: {usersCards: toSave._id} },
+            )
+            .catch(err => {
+                throw err
+            })
+        return {ok: true}
+    }
+
 }
 
 module.exports = CardService
