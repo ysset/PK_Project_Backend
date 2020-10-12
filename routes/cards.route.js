@@ -43,45 +43,70 @@ app.get('/theBestAuthors', async (req, res) => {
 
 app.get('/yourAuthors/:userId', async (req, res) => {
     let yourAuthors = await cardService.getYourAuthors(req.params.userId)
+        .then(() => res.send(yourAuthors))
         .catch((err) => {
             err.toString()
             res.status(err === 'Invalid input' ? 400 : 404).json({
                 err: err
             })
         })
-    res.send(yourAuthors)
+
 })
 
 app.post('/saveCard', jsonParser, async (req, res) => {
-    let toSave = await cardService.saveCard(req.body)
+    await cardService.saveCard(req.body)
+        .then(() => res.send({ok: true}))
         .catch(err => {
-            throw err
+            err.toString()
+            res.status(err === 'Invalid input' ? 400 : 404).json({
+                err: err
+            })
         })
-    res.send({ok: true})
 })
 
 app.post('/createArt', jsonParser, async (req, res) => {
-    let toCreate = await artService.createArt(req.body)
+    await artService.createArt(req.body)
+        .then(() => res.send({ok: true}))
         .catch(err => {
-            throw err
+            err.toString()
+            res.status(err === 'Invalid input' ? 400 : 404).json({
+                err: err
+            })
         })
-    res.send({ok: true})
 })
 
 app.post('/updateArt', jsonParser, async  (req, res) => {
-    let toUpdate = artService.updateArt(req.body)
+    await artService.updateArt(req.body)
+        .then(() => res.send({ok: true}))
         .catch(err => {
-            throw err
+            err.toString()
+            res.status(err === 'Invalid input' ? 400 : 404).json({
+                err: err
+            })
         })
-    res.send({ok: true})
+
 })
 
-app.get('/deleteArt', jsonParser, async (req, res) => {
-    let toDelete = artService.deleteArt(req.body)
+app.post('/deleteArt', jsonParser, async (req, res) => {
+    await artService.deleteArt(req.body)
+        .then((isOk) => res.send(isOk))
         .catch(err => {
-            throw err
+            err.toString()
+            res.status(err === 'Invalid input' ? 400 : 404).json({
+                err: err
+            })
         })
-    res.send({ok: true})
+})
+
+app.post('/deleteChapterOfArt', jsonParser, async (req, res) => {
+    await artService.deleteChapterOfArt(req.body)
+        .then(() => res.send({ok: true}))
+        .catch(err => {
+            err.toString()
+            res.status(err === 'Invalid input' ? 400 : 404).json({
+                err: err
+            })
+        })
 })
 
 module.exports = app

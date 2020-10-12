@@ -8,7 +8,8 @@ const schema = mongoose.Schema({
             chapterName: String,
             chapterText: String,
         }
-    ]
+    ],
+    cardId: String
 }, { collection: "arts" })
 
 module.exports = mongoose.model("artModel", schema)

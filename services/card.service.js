@@ -65,9 +65,10 @@ class CardService {
     }
 
     saveCard = async toSave => {
+        if (!mongoose.Types.ObjectId.isValid(toSave.yourId) || !mongoose.Types.ObjectId.isValid(toSave.cardId)) throw "Invalid input"
         await userModel.findOneAndUpdate(
             { _id: toSave.yourId },
-            { $push: {usersCards: toSave._id} },
+            { $push: {usersCards: toSave.cardId} },
             )
             .catch(err => {
                 throw err

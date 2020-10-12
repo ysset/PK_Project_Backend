@@ -20,17 +20,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="24d63d5d-b281-4a30-8856-175b071cd34d" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/models/artModel.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/services/art.service.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/cardModel.js" beforeDir="false" afterPath="$PROJECT_DIR$/models/cardModel.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/userModel.js" beforeDir="false" afterPath="$PROJECT_DIR$/models/userModel.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/.yarn-integrity" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.yarn-integrity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/artModel.js" beforeDir="false" afterPath="$PROJECT_DIR$/models/artModel.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/cards.route.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/cards.route.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/services/art.service.js" beforeDir="false" afterPath="$PROJECT_DIR$/services/art.service.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/services/card.service.js" beforeDir="false" afterPath="$PROJECT_DIR$/services/card.service.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -41,7 +35,7 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/services/art.service.js" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/services/art.service.js" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="ProjectId" id="1iGU30FD7CpHAzxPlDcTufqL9FA" />
   <component name="ProjectLevelVcsManager">
@@ -102,7 +96,8 @@
       <workItem from="1602064924622" duration="39000" />
       <workItem from="1602305845837" duration="10063000" />
       <workItem from="1602393595673" duration="2603000" />
-      <workItem from="1602396320551" duration="17856000" />
+      <workItem from="1602396320551" duration="20731000" />
+      <workItem from="1602455417210" duration="9261000" />
     </task>
     <servers />
   </component>
@@ -134,6 +129,10 @@
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="640" y="275" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1602402518009" />
+    <state x="56" y="530" width="1736" height="896" key="DiffContextDialog" timestamp="1602458998002">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state x="56" y="530" width="1736" height="896" key="DiffContextDialog/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1602458998002" />
     <state x="2610" y="237" key="FileChooserDialogImpl" timestamp="1602064960621">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
@@ -207,14 +206,14 @@
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="777" y="453" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1601634133951" />
-    <state x="1913" y="0" width="980" height="541" key="dock-window-1" timestamp="1602411563062">
+    <state x="1913" y="0" width="974" height="540" key="dock-window-1" timestamp="1602455709225">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
-    <state x="1913" y="0" width="980" height="541" key="dock-window-1/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1602411563062" />
-    <state x="2879" y="0" width="968" height="541" key="dock-window-2" timestamp="1602411563062">
+    <state x="1913" y="0" width="974" height="540" key="dock-window-1/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1602455709225" />
+    <state x="2873" y="0" width="974" height="540" key="dock-window-2" timestamp="1602455709226">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
-    <state x="2879" y="0" width="968" height="541" key="dock-window-2/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1602411563062" />
+    <state x="2873" y="0" width="974" height="540" key="dock-window-2/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1602455709226" />
     <state x="616" y="250" key="run.anything.popup" timestamp="1601635371005">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
