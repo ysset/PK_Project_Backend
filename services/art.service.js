@@ -42,9 +42,19 @@ class artService {
             {_id: toUpdate.id},
             {$push: {chapters: toUpdate.newChapters}}
         )
-            .then(() => {
-                return {ok: true}
+            .then(() => {ok: true})
+            .catch(err => {
+                throw err
             })
+    }
+
+    updateArtName = async toUpdate => {
+        if (!mongoose.Types.ObjectId.isValid(toUpdate.id)) throw "Invalid input"
+        await artModel.findByIdAndUpdate(
+            {_id: toUpdate.id},
+            {artName: toUpdate.newArtName}
+            )
+            .then(() => {ok: true})
             .catch(err => {
                 throw err
             })
@@ -67,7 +77,6 @@ class artService {
                 if (err) throw err
             }
         )
-
     }
 
     deleteArt = async toDelete => {

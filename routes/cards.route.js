@@ -6,7 +6,6 @@ const ArtService = require("../services/art.service")
 
 const app = express.Router()
 const jsonParser = bodyParser.json()
-const urlencodedParser = bodyParser.urlencoded({ extended: false })
 const cardService = new CardService()
 const artService = new ArtService()
 

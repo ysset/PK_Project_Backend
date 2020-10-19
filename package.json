@@ -5,9 +5,19 @@
   "license": "MIT",
   "dependencies": {
     "body-parser": "^1.19.0",
+    "cookie-parser": "^1.4.5",
+    "debug": "^4.2.0",
+    "dotenv": "^8.2.0",
     "express": "^4.17.1",
+    "express-openid-connect": "^2.0.0",
+    "express-session": "^1.17.1",
+    "helmet": "^4.1.1",
     "mongoose": "^5.10.7",
-    "nodemon": "^2.0.4"
+    "morgan": "^1.10.0",
+    "nodemon": "^2.0.5",
+    "passport": "^0.4.1",
+    "passport-vkontakte": "^0.5.0",
+    "serve-static": "^1.14.1"
   },
   "scripts": {
     "start": "node index.js"
