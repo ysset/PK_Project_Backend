@@ -36,9 +36,6 @@ mongoose
             function myVerifyCallbackFn(accessToken, refreshToken, params, profile, done) {
                 User.findOne({vkontakteId: profile.id}, (err, result) => {
                     return result ? done(result) : User.create({vkontakteId: profile.id}, (err, result) => done(result))
-                        .catch(err => {
-                            debug(err)
-                        })
                 })
             }
         ));
