@@ -1,11 +1,6 @@
 const express = require("express")
 const mongoose = require("mongoose")
 const cardsRoute = require("./routes/cards.route")
-const {auth} = require("express-openid-connect")
-const session = require("express-session")
-const morgan = require("morgan")
-const {join} = require("path")
-const helmet = require("helmet")
 const debug = require("debug")("app:server")
 const VKStrategy = require("passport-vkontakte").Strategy
 const passport = require("passport")
@@ -34,9 +29,9 @@ mongoose
                 callbackURL: process.env.callbackURL,
             },
             function myVerifyCallbackFn(accessToken, refreshToken, params, profile, done) {
-                User.findOne({vkontakteId: profile.id}, (err, result) => {
-                    return result ? done(result) : User.create({vkontakteId: profile.id}, (err, result) => done(result))
-                })
+                User.findOneOrCreate({vkontakteId: profile.id})
+                    .then(user => done(null, user))
+                    .catch(done)
             }
         ));
 
