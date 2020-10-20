@@ -64,7 +64,7 @@ mongoose
             })
         );
 
-        app.use("/cards", cardsRoute)
+        app.use("/", cardsRoute)
 
         app.listen(5000, () => debug(console.log("Server is running")))
     })
