@@ -3,7 +3,8 @@ const mongoose = require("mongoose")
 const schema = mongoose.Schema({
     cover: String,
     password: String,
-    name: String,
+    name: Number,
+    vkontakteId: String,
     registrationDate: String,
     usersAuthors: [
         {
@@ -18,17 +19,18 @@ const schema = mongoose.Schema({
     ],
 }, {collection: 'Users'})
 
-schema.statics.findOneOrCreate = function findOneOrCreate(condition, doc) {
+schema.statics.findOneOrCreate = function findOneOrCreate(condition) {
     const self = this;
-    const newDocument = doc;
     return new Promise((resolve, reject) => {
         return self.findOne(condition)
             .then((result) => {
                 if (result) {
+                    console.log(result)
                     return resolve(result);
                 }
-                return self.create(newDocument)
+                return self.create(condition)
                     .then((result) => {
+                        console.log(result)
                         return resolve(result);
                     }).catch((error) => {
                         return reject(error);

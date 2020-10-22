@@ -1,7 +1,7 @@
 const mongoose = require("mongoose")
 
 const schema = mongoose.Schema({
-    cover: String,
+    coverUrl: String,
     name: String,
     like: Number,
     date: String,

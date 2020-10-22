@@ -1,6 +1,8 @@
 const mongoose = require('mongoose')
 const artModel = require("../models/artModel")
 const cardModel = require("../models/cardModel")
+const cloudinary = require('cloudinary').v2
+const dotenv = require("dotenv").config()
 
 class artService {
 
@@ -8,28 +10,38 @@ class artService {
         let newArtId = mongoose.Types.ObjectId()
         let newCardId = mongoose.Types.ObjectId()
 
-        let newArt = await new artModel({
-            author: toSave.art.author,
-            artName: toSave.art.artName,
-            cardId: newCardId,
+        cloudinary.config({
+            cloud_name: process.env.CLOUD_NAME,
+            api_key: process.env.API_KEY,
+            api_secret: process.env.API_SECRET,
         })
 
-        newArt._id = newArtId
-        newArt.save()
-            .catch(err => {
-                throw err
+        await cloudinary.uploader.upload(`./uploads/${toSave.file.filename}`, (err, result) => console.log(result, err))
+            .then(async res => {
+                let newArt = await new artModel({
+                    author: toSave.body.author,
+                    artName: toSave.body.artName,
+                    cardId: newCardId,
+                })
+                console.log(res)
+                newArt._id = newArtId
+                newArt.save()
+                    .catch(err => {
+                        throw err
+                    })
+                let newCard = await new cardModel({
+                    coverUrl: res.secure_url,
+                    name: toSave.body.artName,
+                    like: toSave.body.like,
+                    date: toSave.body.date,
+                    artId: newArtId,
+                })
+                newCard._id = newCardId
+                newCard.save()
+                    .catch(err => {
+                        throw err
+                    })
             })
-
-        let newCard = await new cardModel({
-            cover: toSave.card.cover,
-            name: toSave.card.name,
-            like: toSave.card.like,
-            date: toSave.card.date,
-            artId: newArtId
-        })
-
-        newCard._id = newCardId
-        newCard.save()
             .catch(err => {
                 throw err
             })
@@ -42,7 +54,9 @@ class artService {
             {_id: toUpdate.id},
             {$push: {chapters: toUpdate.newChapters}}
         )
-            .then(() => {ok: true})
+            .then(() => {
+                ok: true
+            })
             .catch(err => {
                 throw err
             })
@@ -53,8 +67,10 @@ class artService {
         await artModel.findByIdAndUpdate(
             {_id: toUpdate.id},
             {artName: toUpdate.newArtName}
-            )
-            .then(() => {ok: true})
+        )
+            .then(() => {
+                ok: true
+            })
             .catch(err => {
                 throw err
             })
@@ -89,6 +105,7 @@ class artService {
             if (err) throw err
         })
     }
+
 }
 
 module.exports = artService

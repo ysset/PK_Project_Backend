@@ -6,6 +6,7 @@ const VKStrategy = require("passport-vkontakte").Strategy
 const passport = require("passport")
 const User = require("./models/userModel")
 const dotenv = require('dotenv').config()
+const cors = require("cors")
 
 mongoose
     .connect("mongodb+srv://Ysset:0147369852WASd@cluster0.48lsu.gcp.mongodb.net/PK_Project", {
@@ -16,6 +17,9 @@ mongoose
     .then(() => {
         const app = express()
 
+        app.use(cors())
+        app.use(express.json())
+
         app.use(require('cookie-parser')());
         app.use(require('body-parser').urlencoded({extended: true}))
         app.use(require('express-session')({secret: 'keyboard cat', resave: true, saveUninitialized: true}))
@@ -24,13 +28,17 @@ mongoose
 
         passport.use(new VKStrategy(
             {
-                clientID: process.env.clientID, // VK.com docs call it 'API ID', 'app_id', 'api_id', 'client_id' or 'apiId'
-                clientSecret: process.env.clientSecret,
-                callbackURL: process.env.callbackURL,
+                clientID: process.env.CLIENT_ID, // VK.com docs call it 'API ID', 'app_id', 'api_id', 'client_id' or 'apiId'
+                clientSecret: process.env.CLIENT_SICRET,
+                callbackURL: process.env.CALL_BACK_URL,
             },
             function myVerifyCallbackFn(accessToken, refreshToken, params, profile, done) {
+                console.log(accessToken, refreshToken, params, profile.id, done)
                 User.findOneOrCreate({vkontakteId: profile.id})
-                    .then(user => done(null, user))
+                    .then(user => {
+                        console.log(user)
+                        done(null, user)
+                    })
                     .catch(done)
             }
         ));

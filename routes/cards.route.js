@@ -3,7 +3,9 @@ const bodyParser = require("body-parser")
 
 const CardService = require("../services/card.service")
 const ArtService = require("../services/art.service")
+const multer = require("multer")
 
+const upload = multer({ dest: 'uploads/'})
 const app = express.Router()
 const jsonParser = bodyParser.json()
 const cardService = new CardService()
@@ -63,8 +65,9 @@ app.post('/saveCard', jsonParser, async (req, res) => {
         })
 })
 
-app.post('/createArt', jsonParser, async (req, res) => {
-    await artService.createArt(req.body)
+app.post('/createArt', upload.single('cover'), async (req, res) => {
+    console.log(req.body)
+    await artService.createArt(req)
         .then(() => res.send({ok: true}))
         .catch(err => {
             err.toString()
@@ -106,6 +109,11 @@ app.post('/deleteChapterOfArt', jsonParser, async (req, res) => {
                 err: err
             })
         })
+})
+
+app.post('/createAndUpload', upload.single('cover'), async (req, res) => {
+    await artService.createArt(req)
+        .then(coverUrl => res.json(coverUrl))
 })
 
 module.exports = app

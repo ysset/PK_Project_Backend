@@ -2,6 +2,8 @@ const cardModel = require("../models/cardModel")
 const authorsCard = require("../models/authorsCardModel")
 const userModel = require("../models/userModel")
 const mongoose = require('mongoose')
+const cloudinary = require('cloudinary').v2
+const dotenv = require("dotenv").config()
 
 class CardService {
 
@@ -50,16 +52,6 @@ class CardService {
                 .findById(userId)
                 .populate("usersAuthors")
             if (result === null) reject("You don't have lovely authors, yet =)")
-
-            //нечаянно реализовал метод 1:М в коде.
-
-            // let yourAuthors = new Promise(async (resolve, reject) => {
-            //     result.map(async (object) => {
-            //         let findYourAuthors = await userModel.find({_id: [...object.usersAuthors]})
-            //         if (findYourAuthors.length === 0) reject("You don't have lovely authors, yet =)")
-            //         resolve(findYourAuthors)
-            //     })
-            // })
             resolve(result.usersAuthors)
         })
     }
@@ -76,6 +68,22 @@ class CardService {
         return {ok: true}
     }
 
+    createAndUpload = async toUpload => {
+        let  coverUrl;
+        cloudinary.config({
+            cloud_name: process.env["cloud_name"],
+            api_key: process.env["api_key"],
+            api_secret: process.env["api_secret"],
+        })
+        await cloudinary.uploader.upload(`./uploads/${toUpload.file.filename}`, (err, result) => console.log(result, err))
+            .then(async res => {
+                await cardModel.create({coverUrl: res.secure_url}, err => {
+                    if (err) throw err
+                })
+                return coverUrl = res.secure_url
+            })
+        return coverUrl
+    }
 }
 
 module.exports = CardService
