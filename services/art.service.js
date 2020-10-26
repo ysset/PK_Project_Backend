@@ -4,33 +4,37 @@ const cardModel = require("../models/cardModel")
 const cloudinary = require('cloudinary').v2
 const dotenv = require("dotenv").config()
 
-class artService {
+//Config для облака в котором хранится весь медиа контент
+cloudinary.config({
+    cloud_name: process.env.CLOUD_NAME,
+    api_key: process.env.API_KEY,
+    api_secret: process.env.API_SECRET,
+})
 
+class artService {
+    //метод создания нового произведения пользователя
     createArt = async toSave => {
+        //Создание ID вне модели для обмена ID между моделью карточки и произведения
         let newArtId = mongoose.Types.ObjectId()
         let newCardId = mongoose.Types.ObjectId()
-
-        cloudinary.config({
-            cloud_name: process.env.CLOUD_NAME,
-            api_key: process.env.API_KEY,
-            api_secret: process.env.API_SECRET,
-        })
-
+        //Загрузка полученого контента в облако
         await cloudinary.uploader.upload(`./uploads/${toSave.file.filename}`, (err, result) => console.log(result, err))
             .then(async res => {
+                //создание новой модели произведения
                 let newArt = await new artModel({
                     author: toSave.body.author,
                     artName: toSave.body.artName,
                     cardId: newCardId,
                 })
-                console.log(res)
                 newArt._id = newArtId
                 newArt.save()
                     .catch(err => {
                         throw err
                     })
+                //создание новой модели карточки произведения
                 let newCard = await new cardModel({
-                    coverUrl: res.secure_url,
+                    coverForHotFeedUrl: res.secure_url,
+                    coverForInterestingUrl: "",
                     name: toSave.body.artName,
                     like: toSave.body.like,
                     date: toSave.body.date,
@@ -41,7 +45,21 @@ class artService {
                     .catch(err => {
                         throw err
                     })
+                await cloudinary.image(`./uploads/${toSave.file.filename}`, {
+                    height: 300,
+                    width: 175,
+                    y: 0,
+                    crop: "fill"
+                })
+                    .then(async res => {
+                        await cardModel.findByIdAndUpdate(
+                            {_id: newCardId},
+                            {coverForHotFeedUrl: res.secure_url}
+                        )
+                    })
+
             })
+            //ловим ошибки
             .catch(err => {
                 throw err
             })

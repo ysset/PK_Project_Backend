@@ -4,6 +4,7 @@ const schema = mongoose.Schema({
     cover: String,
     password: String,
     name: Number,
+    screenName: String,
     vkontakteId: String,
     registrationDate: String,
     usersAuthors: [

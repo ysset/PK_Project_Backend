@@ -1,7 +1,8 @@
 const mongoose = require("mongoose")
 
 const schema = mongoose.Schema({
-    coverUrl: String,
+    coverForHotFeedUrl: String,
+    coverForInterestingUrl: String,
     name: String,
     like: Number,
     date: String,
