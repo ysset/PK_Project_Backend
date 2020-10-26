@@ -9,7 +9,7 @@ passport.serializeUser((user, done) => {
 });
 
 passport.deserializeUser((id, done) => {
-    User.findById(id)
+    User.find({vkontakteId: id})
         .then(user => {
             done(null, user)
         })
@@ -34,6 +34,5 @@ passport.use(
                 })
                 .catch(done)
         }
-
     )
 )
