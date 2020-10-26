@@ -5,7 +5,7 @@ const User = require('../models/userModel');
 
 passport.serializeUser((user, done) => {
     console.log(user)
-    done(null, user.id)
+    done(null, user.vkontakteId)
 });
 
 passport.deserializeUser((id, done) => {
