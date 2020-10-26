@@ -3,7 +3,8 @@ const VKStrategy = require('passport-vkontakte').Strategy;
 const dotenv = require('dotenv').config();
 const User = require('../models/userModel');
 
-passport.deserializeUser((user, done) => {
+passport.serializeUser((user, done) => {
+    console.log(user)
     done(null, user.id)
 });
 

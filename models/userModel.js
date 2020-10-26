@@ -31,7 +31,6 @@ schema.statics.findOneOrCreate = function findOneOrCreate(condition) {
                 }
                 return self.create(condition)
                     .then((result) => {
-                        console.log(result)
                         return resolve(result);
                     }).catch((error) => {
                         return reject(error);
