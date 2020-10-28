@@ -3,6 +3,7 @@ const artModel = require("../models/artModel")
 const cardModel = require("../models/cardModel")
 const cloudinary = require('cloudinary').v2
 const dotenv = require("dotenv").config()
+const userModel = require('../models/userModel')
 
 //Config для облака в котором хранится весь медиа контент
 cloudinary.config({
@@ -14,6 +15,8 @@ cloudinary.config({
 class artService {
     //метод создания нового произведения пользователя
     createArt = async toSave => {
+        console.log(toSave.body) //{ userData: 'xui', user: 'asdas' }
+        console.log(toSave.file)
         let secureUrl = ''
         //Создание ID вне модели для обмена ID между моделью карточки и произведения
         let newArtId = mongoose.Types.ObjectId()
@@ -27,6 +30,9 @@ class artService {
                     artName: toSave.body.artName,
                     cardId: newCardId,
                 })
+                    .catch(err => {
+                        throw err
+                    })
                 newArt._id = newArtId
                 newArt.save()
                     .catch(err => {
@@ -35,13 +41,22 @@ class artService {
                 //создание новой модели карточки произведения
                 let newCard = await new cardModel({
                     name: toSave.body.artName,
-                    like: toSave.body.like,
                     coverUrl: res.secure_url,
                     date: `${new Date().getDay()}:${new Date().getMonth()}:${new Date().getFullYear()},${new Date().getHours()}:${new Date().getMinutes()}`,
                     artId: newArtId,
                 })
+                    .catch(err => {
+                        throw err
+                    })
                 newCard._id = newCardId
                 newCard.save()
+                    .catch(err => {
+                        throw err
+                    })
+                await userModel.findByIdAndUpdate(
+                    {_id: toSave.body._id},
+                    {$push: {usersAuthors: {cardId: newCard}}}
+                    )
                     .catch(err => {
                         throw err
                     })

@@ -13,16 +13,14 @@ const schema = mongoose.Schema({
     hatProfileCover: String,
     vkontakteId: String,
     registrationDate: String,
-    // "https://res-console.cloudinary.com/dbhjalp68/thumbnails/v1/image/upload/v1603372282/YmdndHRlcHR6cWptdmtsNHdqMWs=/preview"
     usersAuthors: [
         {
-            type: mongoose.Schema.Types.ObjectID,
-            ref: "userModel"
+            usersId: mongoose.Schema.Types.ObjectID
         }
     ],
     usersCards: [
         {
-            type: mongoose.Schema.Types.ObjectID
+            cardId: mongoose.Schema.Types.ObjectID
         }
     ],
 }, {collection: 'Users'})

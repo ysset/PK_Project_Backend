@@ -110,7 +110,7 @@ app.post('/deleteChapterOfArt', jsonParser, async (req, res) => {
         })
 })
 
-app.post('/createAndUpload', upload.single('cover'), async (req, res) => {
+app.post('/createAndUpload', upload.single('cover','user'), async (req, res) => {
     await artService.createArt(req)
         .then(coverUrl => res.json(coverUrl))
 })
