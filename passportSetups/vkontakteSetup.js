@@ -27,7 +27,7 @@ passport.use(
         },
         async function myVerifyCallbackFn(accessToken, refreshToken, params, profile, done) {
             console.log(profile)
-            await User.findOneOrCreate({vkontakteId: profile.id})
+            await User.findOneOrCreate({profile})
                 .then(user => {
                     console.log(user)
                     done(null, user)
