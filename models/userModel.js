@@ -39,8 +39,8 @@ schema.statics.findOneOrCreate = function findOneOrCreate(profile) {
                     vkontakteId: profile.id,
                     username: profile.username,
                     name: {
-                        familyName: profile.name.familyName,
-                        givenName: profile.name.givenName
+                        familyName: profile.profile.name.familyName,
+                        givenName: profile.profile.name.givenName
                     },
                     gender: profile.gender,
                     registrationDate: new Date().getDate()
