@@ -31,7 +31,7 @@ router.get("/vkontakte", passport.authenticate("vkontakte"));
 router.get(
     "/vkontakte/redirect",
     passport.authenticate("vkontakte", {
-        successRedirect: "http://localHost:3000",
+        successRedirect: "https://pk.hitmarker.pro",
         failureRedirect: "/auth/login/failed",
     })
 );
