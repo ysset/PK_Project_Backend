@@ -14,6 +14,7 @@ cloudinary.config({
 class artService {
     //метод создания нового произведения пользователя
     createArt = async toSave => {
+        let secureUrl = ''
         //Создание ID вне модели для обмена ID между моделью карточки и произведения
         let newArtId = mongoose.Types.ObjectId()
         let newCardId = mongoose.Types.ObjectId()
@@ -45,12 +46,14 @@ class artService {
                     .catch(err => {
                         throw err
                     })
+                secureUrl = res.secure_url
+                return secureUrl
             })
             //ловим ошибки
             .catch(err => {
                 throw err
             })
-        return {ok: true}
+        return {secureUrl: secureUrl}
     }
 
     updateArt = async toUpdate => {
