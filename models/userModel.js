@@ -26,23 +26,22 @@ const schema = mongoose.Schema({
 }, {collection: 'Users'})
 
 schema.statics.findOneOrCreate = function findOneOrCreate(profile) {
-    console.log(profile.profile.name)
     const self = this;
     return new Promise((resolve, reject) => {
-        return self.findOne(profile.id)
+        return self.findOne({vkontakteId: profile.id})
             .then((result) => {
                 if (result) {
                     return resolve(result);
                 }
                 return self.create({
-                    displayName: profile.profile.displayName,
-                    vkontakteId: profile.profile.id,
-                    username: profile.profile.username,
+                    displayName: profile.displayName,
+                    vkontakteId: profile.id,
+                    username: profile.username,
                     name: {
-                        familyName: profile.profile.name.familyName,
-                        givenName: profile.profile.name.givenName
+                        familyName: profile.name.familyName,
+                        givenName: profile.name.givenName
                     },
-                    gender: profile.profile.gender,
+                    gender: profile.gender,
                     registrationDate: `${new Date().getDay()}:${new Date().getMonth()}:${new Date().getFullYear()},${new Date().getHours()}:${new Date().getMinutes()}`
                 })
                     .then((result) => {
