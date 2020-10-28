@@ -5,7 +5,7 @@ const CardService = require("../services/card.service")
 const ArtService = require("../services/art.service")
 const multer = require("multer")
 
-const upload = multer({ dest: 'uploads/'})
+const upload = multer({dest: 'uploads/'})
 const app = express.Router()
 const jsonParser = bodyParser.json()
 const cardService = new CardService()
@@ -51,7 +51,6 @@ app.get('/yourAuthors/:userId', async (req, res) => {
                 err: err
             })
         })
-
 })
 
 app.post('/saveCard', jsonParser, async (req, res) => {
@@ -77,7 +76,7 @@ app.post('/createArt', upload.single('cover'), async (req, res) => {
         })
 })
 
-app.post('/updateArt', jsonParser, async  (req, res) => {
+app.post('/updateArt', jsonParser, async (req, res) => {
     await artService.updateArt(req.body)
         .then(() => res.send({ok: true}))
         .catch(err => {

@@ -26,6 +26,7 @@ passport.use(
             callbackURL: process.env.CALL_BACK_URL,
         },
         async function myVerifyCallbackFn(accessToken, refreshToken, params, profile, done) {
+            console.log(profile)
             await User.findOneOrCreate({vkontakteId: profile.id})
                 .then(user => {
                     console.log(user)
