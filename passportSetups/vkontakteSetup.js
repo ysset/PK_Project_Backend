@@ -5,11 +5,11 @@ const User = require('../models/userModel');
 
 passport.serializeUser((user, done) => {
     console.log(user)
-    done(null, user._id)
+    done(null, user.id)
 });
 
 passport.deserializeUser((id, done) => {
-    User.find({vkontakteId: id})
+    User.findById({_id: id})
         .then(user => {
             done(null, user)
         })
@@ -25,9 +25,8 @@ passport.use(
             clientSecret: process.env.CLIENT_SICRET,
             callbackURL: process.env.CALL_BACK_URL,
         },
-        function myVerifyCallbackFn(accessToken, refreshToken, params, profile, done) {
-            console.log(accessToken, refreshToken, params, profile.id, done)
-            User.findOneOrCreate({vkontakteId: profile.id})
+        async function myVerifyCallbackFn(accessToken, refreshToken, params, profile, done) {
+            await User.findOneOrCreate({vkontakteId: profile.id})
                 .then(user => {
                     console.log(user)
                     done(null, user)
