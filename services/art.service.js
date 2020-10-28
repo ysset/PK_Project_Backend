@@ -30,9 +30,6 @@ class artService {
                     artName: toSave.body.artName,
                     cardId: newCardId,
                 })
-                    .catch(err => {
-                        throw err
-                    })
                 newArt._id = newArtId
                 newArt.save()
                     .catch(err => {
@@ -45,9 +42,6 @@ class artService {
                     date: `${new Date().getDay()}:${new Date().getMonth()}:${new Date().getFullYear()},${new Date().getHours()}:${new Date().getMinutes()}`,
                     artId: newArtId,
                 })
-                    .catch(err => {
-                        throw err
-                    })
                 newCard._id = newCardId
                 newCard.save()
                     .catch(err => {
