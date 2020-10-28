@@ -21,8 +21,6 @@
   <component name="ChangeListManager">
     <list default="true" id="24d63d5d-b281-4a30-8856-175b071cd34d" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/cardModel.js" beforeDir="false" afterPath="$PROJECT_DIR$/models/cardModel.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/userModel.js" beforeDir="false" afterPath="$PROJECT_DIR$/models/userModel.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/services/art.service.js" beforeDir="false" afterPath="$PROJECT_DIR$/services/art.service.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -127,6 +125,14 @@
       <workItem from="1603758048370" duration="606000" />
       <workItem from="1603844558779" duration="683000" />
     </task>
+    <task id="LOCAL-00001" summary="Fix user and card model, fix create card in art.service">
+      <created>1603891090038</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1603891090038</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -143,6 +149,10 @@
       </map>
     </option>
     <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Fix user and card model, fix create card in art.service" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fix user and card model, fix create card in art.service" />
   </component>
   <component name="WindowStateProjectService">
     <state x="414" y="194" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1601546360202">

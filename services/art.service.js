@@ -36,7 +36,7 @@ class artService {
                 let newCard = await new cardModel({
                     name: toSave.body.artName,
                     like: toSave.body.like,
-                    coverUrl: toSave.body.coverUrl,
+                    coverUrl: res.secure_url,
                     date: `${new Date().getDay()}:${new Date().getMonth()}:${new Date().getFullYear()},${new Date().getHours()}:${new Date().getMinutes()}`,
                     artId: newArtId,
                 })
