@@ -35,15 +35,15 @@ schema.statics.findOneOrCreate = function findOneOrCreate(profile) {
                     return resolve(result);
                 }
                 return self.create({
-                    displayName: profile.displayName,
-                    vkontakteId: profile.id,
-                    username: profile.username,
+                    displayName: profile.profile.displayName,
+                    vkontakteId: profile.profile.id,
+                    username: profile.profile.username,
                     name: {
                         familyName: profile.profile.name.familyName,
                         givenName: profile.profile.name.givenName
                     },
-                    gender: profile.gender,
-                    registrationDate: new Date().getDate()
+                    gender: profile.profile.gender,
+                    registrationDate: `${new Date().getDay()}:${new Date().getMonth()}:${new Date().getFullYear()},${new Date().getHours()}:${new Date().getMinutes()}`
                 })
                     .then((result) => {
                         return resolve(result);
