@@ -26,7 +26,7 @@ const schema = mongoose.Schema({
 }, {collection: 'Users'})
 
 schema.statics.findOneOrCreate = function findOneOrCreate(profile) {
-    console.log(profile.name)
+    console.log(profile)
     const self = this;
     return new Promise((resolve, reject) => {
         return self.findOne(profile.id)
