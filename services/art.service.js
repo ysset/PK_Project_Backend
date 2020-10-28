@@ -45,19 +45,6 @@ class artService {
                     .catch(err => {
                         throw err
                     })
-                await cloudinary.image(`./uploads/${toSave.file.filename}`, {
-                    height: 300,
-                    width: 175,
-                    y: 0,
-                    crop: "fill"
-                })
-                    .then(async res => {
-                        await cardModel.findByIdAndUpdate(
-                            {_id: newCardId},
-                            {coverForHotFeedUrl: res.secure_url}
-                        )
-                    })
-
             })
             //ловим ошибки
             .catch(err => {
