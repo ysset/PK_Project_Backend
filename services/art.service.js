@@ -34,11 +34,10 @@ class artService {
                     })
                 //создание новой модели карточки произведения
                 let newCard = await new cardModel({
-                    coverForHotFeedUrl: res.secure_url,
-                    coverForInterestingUrl: "",
                     name: toSave.body.artName,
                     like: toSave.body.like,
-                    date: toSave.body.date,
+                    coverUrl: toSave.body.coverUrl,
+                    date: `${new Date().getDay()}:${new Date().getMonth()}:${new Date().getFullYear()},${new Date().getHours()}:${new Date().getMinutes()}`,
                     artId: newArtId,
                 })
                 newCard._id = newCardId

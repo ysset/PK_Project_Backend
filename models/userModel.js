@@ -10,8 +10,10 @@ const schema = mongoose.Schema({
     username: String,
     password: String,
     cover: String,
+    hatProfileCover: String,
     vkontakteId: String,
     registrationDate: String,
+    // "https://res-console.cloudinary.com/dbhjalp68/thumbnails/v1/image/upload/v1603372282/YmdndHRlcHR6cWptdmtsNHdqMWs=/preview"
     usersAuthors: [
         {
             type: mongoose.Schema.Types.ObjectID,
